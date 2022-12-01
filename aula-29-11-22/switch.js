@@ -1,6 +1,6 @@
 let numero1 = 5
 let numero2 = 10
-let operacao = 3
+let operacao = '3'
 
 let resultado;
 
@@ -16,26 +16,32 @@ let resultado;
 //     resultado = -9999
 // }
 
+// switch case > escolha caso
+// ==
 switch(operacao){
-    case 1: {
+    case '1': 
         resultado = numero1 + numero2
+        console.log('executou o caso de somar')
         break;
-    }
-    case 2: {
+        
+    case '2': 
         resultado = numero1 - numero2
+        console.log('executou o caso de sbutracao')
         break;
-    }
-    case 3: {
+
+    case '3': 
         resultado = numero1 * numero2
-        break
-    }
-    case 4: {
+        console.log('executou o caso de multiplicao')
+    
+    case '4': 
         resultado = numero1 / numero2
+        console.log('executou o caso de divisao')
         break
-    }
-    default: {
+    
+    default: 
         resultado = -9999
-    }
+        console.log('a opcao nao foi encontrada, entao executou o default')
+    
 }
 
 document.write(`Resultado da operacao é: ${resultado}`)
