@@ -1,19 +1,21 @@
 function carregarInformacoes(){
-    const divInfos = document.getElementById('informacoes')
+    const tBody = document.getElementById('corpo-tabela')
 
-    const elementoP = document.createElement('p')
+    const listaDevs = JSON.parse(localStorage.getItem('devsCadastrados'))
 
-    elementoP.innerHTML = `
-    <strong>Nome:</strong> ${localStorage.getItem('nomeCompleto')}, <br/>
-    <strong>E-mail:</strong> ${localStorage.getItem('email')}, <br/>
-    <strong>Telefone:</strong> ${localStorage.getItem('telefone')}, <br/>
-    <strong>Endereço:</strong> ${localStorage.getItem('endereco')}, <br/>
-    <strong>Dt. Nascimento:</strong> ${localStorage.getItem('dataNascimento')}, <br/>
-    <strong>Área de atuação:</strong> ${localStorage.getItem('areaAtuacao')}, <br/>
-    <strong>Senioridade:</strong> ${localStorage.getItem('nivelSenior')}
-    `;
+    listaDevs.forEach((dev) => {
+        tBody.innerHTML += `
+            <tr>
+                <td>${dev.nome}</td>
+                <td>${dev.email}</td>
+                <td>${dev.telefone}</td>
+                <td>${dev.dataNascimento}</td>
+                <td>${dev.endereco}</td>
+                <td>${dev.atuacao}</td>
+                <td>${dev.senioridade}</td>
+            </tr>
+        `
+    })
 
-    // <p> Nome: Edson </p>
-
-    divInfos.appendChild(elementoP)
+   
 }

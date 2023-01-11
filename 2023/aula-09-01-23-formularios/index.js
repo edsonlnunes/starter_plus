@@ -1,36 +1,51 @@
+// localStorage.setItem => adiciona informações no local storage
+// localStorage.getItem => recupera informações do local storage
+// localStorage.removeItem => remove informações do local storage
+
 function cadastrarDev(event){
     // para o comportamento do evento de submit (nao deixa a pagina atualizar)
     event.preventDefault() 
 
     const formulario = document.getElementById('formulario-cadastro')
 
-    // criar um objeto com as informações
-    // salvar o objeto no localStorage
+    const dev = {
+        nome: formulario.nomeCompleto.value,
+        email: formulario.email.value,
+        dataNascimento: formulario.dataNascimento.value,
+        telefone: formulario.telefone.value,
+        endereco: formulario.endereco.value,
+        atuacao: formulario.areaAtuacao.value,
+        senioridade: formulario.nivelSenior.value
+    }
 
-    // => JSON
-
-    // salvar no local storage
-    localStorage.setItem('nomeCompleto', formulario.nomeCompleto.value)
-    localStorage.setItem('email', formulario.email.value)
-    localStorage.setItem('dataNascimento', formulario.dataNascimento.value)
-    localStorage.setItem('telefone', formulario.telefone.value)
-    localStorage.setItem('endereco', formulario.endereco.value)
-    localStorage.setItem('areaAtuacao', formulario.areaAtuacao.value)
-    localStorage.setItem('nivelSenior', formulario.nivelSenior.value)
-
+    // JSON = Javascript Object Notation
+    // JSON => A representação de um objeto em Javascript no formato de STRING
+    // JSON.stringify => Converte um objeto em JSON
+    // JSON.parse => Converte um JSON em objeto
     
-    // console.log(formulario.nomeCompleto.value)
-    // console.log(formulario.email.value)
-    // console.log(formulario.dataNascimento.value)
-    // console.log(formulario.telefone.value)
-    // console.log(formulario.endereco.value)
+    // 1º Pegar a lista do localStorage 
+    let listaDevs = JSON.parse(localStorage.getItem('devsCadastrados'))
 
-    // console.log(formulario.areaAtuacao.value)
-    // console.log(formulario.nivelSenior.value)
+    // se não existir valor no localStorage, iniciamos a lista vazia
+    if(!listaDevs){
+        listaDevs = []
+    }
+
+    if(listaDevs.some(devCadastrado => devCadastrado.email === dev.email)){
+        alert('Já existe um DEV cadastrado com este e-mail.')
+        return;
+    }
+
+    if(listaDevs.some(devCadastrado => devCadastrado.telefone === dev.telefone)){
+        alert('Já existe um DEV cadastrado com este telefone.')
+        return;
+    }
+
+    // 2º Atualizar a lista recuperada com o novo dev cadastrado
+    listaDevs.push(dev)
+
+    // 3º Salvar a lista atualizada no localStorage (substituindo a anterior)
+    localStorage.setItem('devsCadastrados', JSON.stringify(listaDevs))
+
+    alert('Dev cadastrado com sucesso')
 }
-
-// formulario.nivelSenior.forEach(function (elemento) {
-//     if(elemento.checked){
-//         console.log(elemento)
-//     }
-// })
